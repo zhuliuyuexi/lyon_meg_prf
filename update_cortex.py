@@ -1,3 +1,5 @@
+import os
+
 
 def set_pycortex_config_file(project_folder):
 

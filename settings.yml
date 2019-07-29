@@ -1,4 +1,8 @@
 systems:
+  calcule:
+    uname: node
+    base_dir: /mnt/data/rasa/prf_lyon
+    threads: 24  
   romulus:
     uname: node230
     base_dir: /scratch/2019/visual/prf_lyon
@@ -7,15 +11,15 @@ systems:
     uname: Darwin
     base_dir: /Users/knapen/Downloads/prf_lyon
     threads: 4
-  calcule:
-    uname: node
-    base_dir: /mnt/data/rasa/prf_lyon
-    threads: 24
+  salledI:
+    uname: pc
+    base_dir: /whateverfolderidecidetomountmyserverfolderat.
+    threads: 8
 
 result_dir: derivatives/out
 session: "01"
 fmriprep_output_wildcard: fmriprep/sub-{subject}/ses-{session}}/func/sub-{subject}*_space-T1w_desc-preproc_bold.nii.gz
-average_wildcard: pp/sub-{subject}/ses-{session}/func/sub-{subject}*_space-T1w_desc-preproc_bold_sg_psc.nii.gz
+average_wildcard: pp/sub-{subject}/ses-{session}/func/sub-{subject}*_task-PRF-*_space-T1w_desc-preproc_bold_sg_psc.nii.gz
 median_psc_filename: pp/sub-{subject}/ses-{session}/func/sub-{subject}_task-prf_acq-median_T1w_desc-preproc_bold.nii.gz
 brainmask_filename: pp/sub-{subject}/ses-{session}/func/sub-{subject}_task-prf_acq-median_T1w_desc-preproc_brainmask.nii.gz
 example_epi_filename: pp/sub-{subject}/ses-{session}/func/sub-{subject}_task-prf_acq-median_T1w_desc-preproc_boldref.nii.gz

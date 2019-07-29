@@ -44,14 +44,14 @@ if base_dir == None:
 ###
 ###################################################################
 
-nii_files = glob.glob(os.path.join(
+all_nii = glob.glob(os.path.join(
     base_dir, settings['result_dir'], settings['fmriprep_output_wildcard'].format(subject=subject)))
 
 # create parallel folder structure for post-preprocessing
 os.makedirs(os.path.split(os.path.join(base_dir, settings['result_dir'], settings['fmriprep_output_wildcard'].format(subject=subject)))
             [0].replace('fmriprep', 'pp'))
 
-for niif in nii_files:
+for niif in all_nii:
     print('filtering the data')
     sg_nii = savgol_filter(in_file=niif, polyorder=settings['sg_filt_polyorder'],
                            deriv=settings['sg_filt_deriv'], window_length=settings['sg_filt_window_length'], tr=settings['TR'])
@@ -89,7 +89,7 @@ nii_img_median_data.to_filename(os.path.join(os.path.split(
 
 # now, set up all the required files in that folder
 # using the last item of the nii_files, and the to_be_averaged path.
-shutil.copyfile(niif.replace('_desc-preproc_bold', '_brain-mask'),
+shutil.copyfile(to_be_averaged.replace('_desc-preproc_bold', '_brain-mask'),
         os.path.join(os.path.split(to_be_averaged[0])[0], settings['brainmask_filename'].format(subject=subject))))
-shutil.copyfile(niif.replace('_desc-preproc_bold', '_boldref'),
+shutil.copyfile(to_be_averaged.replace('_desc-preproc_bold', '_boldref'),
         os.path.join(os.path.split(to_be_averaged[0])[0], settings['example_epi_filename'].format(subject=subject))))

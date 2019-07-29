@@ -242,8 +242,11 @@ if args.webgl_pRFs == 1 or args.webgl_pRFs == 2 or args.flatmap_pRFs == 1:
         subject=subject), 'ses-{ses}'.format(ses=settings['session']), 'pycortex_ds.h5'))
 
 if args.webgl_pRFs == 1:
-    cortex.webgl.make_static(outpath=os.path.join(base_dir, 'derivatives', 'out', 'pp', 'sub-{subject}'.format(
-        subject=subject), 'ses-{ses}'.format(ses=settings['session']), 'webgl'), data=ds, recache=True)
+    outpath = os.path.join(base_dir, 'derivatives', 'out', 'pp', 'sub-{subject}'.format(
+        subject=subject), 'ses-{ses}'.format(ses=settings['session']), 'webgl')
+    print("making static pycortex webgl instance in {outpath}".format(
+        outpath=outpath))
+    cortex.webgl.make_static(outpath=outpath, data=ds, recache=True)
 elif args.webgl_pRFs == 2:
     cortex.webgl.show(data=ds, recache=True, port=12001)
 
