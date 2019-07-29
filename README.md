@@ -24,3 +24,4 @@ It isn't using all the newest software, but we're aiming for a set of simple scr
 # Other stuff
 
 There are some additional files that aid analysis. First, some shell scripts to run fmriprep and visualize results. Then, an ipython notebook to create the design matrix used in the analysis. This latter design matrix should not have to change after we've created it correctly.
+ 
