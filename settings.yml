@@ -4,9 +4,13 @@ systems:
     base_dir: /scratch/2019/visual/prf_lyon
     threads: 36
   laptop:
-    uname: Tomas
+    uname: Darwin
     base_dir: /Users/knapen/Downloads/prf_lyon
     threads: 4
+  calcule:
+    uname: node
+    base_dir: /mnt/data/rasa/prf_lyon
+    threads: 24
 
 result_dir: derivatives/out
 session: "01"
@@ -29,7 +33,7 @@ min_eccen: 0.25
 min_n: 0.05
 min_size: 0.5
 n_timepoints_per_run: 190
-rsq_threshold: 0.1
+rsq_threshold: 0.2
 screen_distance: 78
 screen_width: 47
 sg_filt_deriv: 0
