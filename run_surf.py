@@ -57,6 +57,7 @@ for ps, pu in zip(possible_systems, possible_unames):
         N_PROCS = settings['systems'][ps]['threads']
 
 if base_dir == None:
+    print('cannot find base_dir in "{uname}", exiting'.format(uname=uname))
     sys.exit()
 
 ###################################################################
@@ -199,9 +200,9 @@ if args.webgl_pRFs == 1 or args.webgl_pRFs == 2 or args.flatmap_pRFs == 1:
     hsv[..., 2] = np.ones_like(rsq)  # np.sqrt(rsq)# np.ones_like(rsq)
 
     alpha_mask = (rsq <= settings['rsq_threshold']).T
-    alpha = np.sqrt(rsq).T * 5  # for graded rsq viz
+    alpha = rsq.T  # np.sqrt(rsq).T * 3  # for graded rsq viz
     # alpha[alpha_mask] = 0
-    alpha = np.ones(alpha.shape)
+    # alpha = np.ones(alpha.shape)
     alpha[alpha_mask] = 0
 
     rgb = colors.hsv_to_rgb(hsv)
@@ -251,5 +252,6 @@ if args.flatmap_pRFs == 1:
                          ['polar', 'ecc', 'size', 'amplitude', 'baseline', 'rsq']):
         fig = cortex.quickflat.make_figure(vol, with_dropout=True)
         plt.savefig(outpath=os.path.join(base_dir, 'derivatives', 'out', 'pp', 'sub-{subject}'.format(
-            subject=subject), 'ses-{ses}'.format(ses=settings['session']), name+'.pdf'))
+            subject=subject), 'ses-{ses}'.format(ses=settings['session']), name+'.svg'))
         plt.close('all')
+        cortex.utils.add_roi(ds, name=name, open_inkscape=False)

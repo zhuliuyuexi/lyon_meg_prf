@@ -10,7 +10,8 @@ import sys
 import yaml
 import multiprocessing
 
-# N_PROCS = multiprocessing.cpu_count()
+from IPython.core.debugger import set_trace
+# call as `set_trace()` for interactive debugging
 
 ###################################################################
 ###
@@ -50,6 +51,7 @@ for ps, pu in zip(possible_systems, possible_unames):
         N_PROCS = settings['systems'][ps]['threads']
 
 if base_dir == None:
+    print('cannot find base_dir in "{uname}", exiting'.format(uname=uname))
     sys.exit()
 
 
