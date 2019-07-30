@@ -38,6 +38,8 @@ subjects = [str(s).zfill(2) for s in args.subjects]
 with open('settings.yml', 'r') as f:
     settings = yaml.load(f)
 
+batchdir = '/home/rasa.gulbinaite/batch/'
+os.chdir(batchdir)
 
 #############################################################################################
 #############################################################################################
@@ -62,10 +64,6 @@ if args.fmriprep:
 
         wait          # wait until programs are finished
         """
-
-        basedir = '/home/rasa.gulbinaite/batch/'
-
-        os.chdir(batchdir)
 
         working_string = batch_string.replace('$SJ_NR', subject)
 
