@@ -58,7 +58,7 @@ if args.fmriprep:
 PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/fmriprep-1.3.0.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
---participant-label sub-$SJ_NR --output-spaces T1w MNI152NLin2009cAsym fsaverage fsnative \
+--participant-label sub-$SJ_NR --output-space T1w template fsaverage fsnative \
 --use-syn-sdc --write-graph --nthreads 15 --omp-nthreads 15 --low-mem --fs-license-file /home/rasa.gulbinaite/software/freesurfer/license.txt \
 --ignore slicetiming --skip_bids_validation 
 
