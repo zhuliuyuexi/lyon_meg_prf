@@ -56,7 +56,7 @@ if args.fmriprep:
 #     and 0 seconds wallclock time
 
 PYTHONPATH="" singularity run -B /mnt/data/rasa \
-/mnt/data/rasa/software/poldracklab_fmriprep_1.4.1-2019-07-09-412a69224405.simg \
+/mnt/data/rasa/software/fmriprep-1.3.0.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
 --participant-label sub-$SJ_NR --output-spaces T1w MNI152NLin2009cAsym fsaverage fsnative \
 --use-syn-sdc --write-graph --nthreads 15 --omp-nthreads 15 --low-mem --fs-license-file /home/rasa.gulbinaite/software/freesurfer/license.txt \
