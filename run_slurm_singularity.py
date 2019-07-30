@@ -90,7 +90,7 @@ if args.mriqc_subject:
 #SBATCH -t 1:00:00 -N 1
 
 PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
-/mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
+/mnt/data/rasa/software/mriqc_0.14.2.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
 --participant-label sub-$SJ_NR --n_procs 15 -m bold --verbose-reports --mem_gb 32 \
 --ants-nthreads 15 -w /scratch
