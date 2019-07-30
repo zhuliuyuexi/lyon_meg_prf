@@ -24,15 +24,18 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--subject', type=int, default=1,
                     help='BIDS integer for this subject')
 
-parser.add_argument('--import_subject', type=int, default=0,
+parser.add_argument('--import_subject',
                     help='whether to import subject into pycortex')
-parser.add_argument('--import_session', type=int, default=0,
+parser.add_argument('--import_session',
                     help='whether to import session into pycortex subject')
 
-parser.add_argument('--flatmap_pRFs', type=int, default=0,
+parser.add_argument('--flatmap_pRFs',
                     help='visualize pRF results in pdfs')
-parser.add_argument('--webgl_pRFs', type=int, default=0,
-                    help='visualize pRF results in web browser')
+parser.add_argument('--webgl_pRFs', type=int,
+                    help='visualize pRF results in web browser. 1: save to folder, 2: open webgl interface')
+parser.set_defaults(import_subject=False, import_session=False,
+                    flatmap_pRFs=False, webgl_pRFs=0)
+
 args = parser.parse_args()
 subject = str(args.subject).zfill(2)
 
@@ -86,7 +89,7 @@ example_epi_file = os.path.join(
 ###
 ###################################################################
 
-if args.import_subject == 1:
+if args.import_subject:
     cortex.freesurfer.import_subj(
         subject='sub-{subject}'.format(subject=subject),
         sname='sub-{subject}'.format(subject=subject),
@@ -109,7 +112,7 @@ if args.import_subject == 1:
 ###
 ###################################################################
 
-if args.import_session == 1:
+if args.import_session:
 
     mtx_file = os.path.join(base_dir, settings['result_dir'], 'pp/sub-{subject}/ses-{session}/flirt.mtx'.format(
         subject=subject, session=settings['session']))
@@ -169,7 +172,7 @@ if args.import_session == 1:
 ###
 ###################################################################
 
-if args.webgl_pRFs == 1 or args.webgl_pRFs == 2 or args.flatmap_pRFs == 1:
+if args.webgl_pRFs == 1 or args.webgl_pRFs == 2 or args.flatmap_pRFs:
     params = nb.load(os.path.join(base_dir, 'derivatives', 'out', 'pp', 'sub-{subject}'.format(
         subject=subject), 'ses-{ses}'.format(ses=settings['session']), 'grid_params.nii.gz'))
     p_data = params.get_data()
@@ -250,7 +253,7 @@ if args.webgl_pRFs == 1:
 elif args.webgl_pRFs == 2:
     cortex.webgl.show(data=ds, recache=True, port=12001)
 
-if args.flatmap_pRFs == 1:
+if args.flatmap_pRFs:
     for vol, name in zip([vrgba, vecc, vsize, vbeta, vbaseline, vrsq],
                          ['polar', 'ecc', 'size', 'amplitude', 'baseline', 'rsq']):
         fig = cortex.quickflat.make_figure(vol, with_dropout=True)

@@ -23,10 +23,11 @@ parser = argparse.ArgumentParser(
     description='Run the pRF fitting on given subject')
 parser.add_argument('--subject', type=int, default=1,
                     help='BIDS integer for this subject')
-parser.add_argument('--grid', type=int, default=0,
+parser.add_argument('--grid',
                     help='whether to perform grid fitting')
-parser.add_argument('--iter', type=int, default=0,
+parser.add_argument('--iter',
                     help='whether to perform iterative fitting')
+parser.set_defaults(grid=False, iter=False)
 args = parser.parse_args()
 subject = str(args.subject).zfill(2)
 
