@@ -69,7 +69,7 @@ if args.fmriprep:
 
         working_string = batch_string.replace('$SJ_NR', subject)
 
-        js_name = os.path.join(basedir, str(
+        js_name = os.path.join(batchdir, str(
             subject).zfill(2) + '_lyon-prf_slurm_fmriprep.sh')
         of = open(js_name, 'w')
         of.write(working_string)
@@ -106,7 +106,7 @@ if args.mriqc_subject:
 
         working_string = batch_string
 
-        js_name = os.path.join(basedir, str(
+        js_name = os.path.join(batchdir, str(
             subject).zfill(2) + '_lyon-prf_slurm_mriqc.sh')
         of = open(js_name, 'w')
         of.write(working_string)
@@ -139,7 +139,7 @@ if args.mriqc_group:
 
     """
 
-    js_name = os.path.join(basedir, 'prf_slurm_mriqc_group.sh')
+    js_name = os.path.join(batchdir, 'prf_slurm_mriqc_group.sh')
     of = open(js_name, 'w')
     of.write(batch_string)
     of.close()
