@@ -51,7 +51,7 @@ if args.fmriprep:
     for subject in subjects:
 
         batch_string = """#!/bin/bash
-#SBATCH -p normal -t 20:00:00 -N 1
+#SBATCH -t 20:00:00 -N 1
 # job requires at most 100 hours, 0 minutes
 #     and 0 seconds wallclock time
 
@@ -87,7 +87,7 @@ if args.mriqc_subject:
     for subject in subjects:
 
         batch_string = """#!/bin/bash
-#SBATCH -p normal -t 1:00:00 -N 1
+#SBATCH -t 1:00:00 -N 1
 
 PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
 /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
@@ -123,7 +123,7 @@ wait          # wait until programs are finished
 if args.mriqc_group:
 
     batch_string = """#!/bin/bash
-#SBATCH -p normal -t 1:00:00 -N 1
+#SBATCH -t 1:00:00 -N 1
 
 PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
 /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
