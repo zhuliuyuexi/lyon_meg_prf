@@ -12,6 +12,7 @@ import yaml
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 
+from utils import *
 
 ###################################################################
 ###
@@ -24,12 +25,15 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--subject', type=int, default=1,
                     help='BIDS integer for this subject')
 
-parser.add_argument('--import_subject',
+parser.add_argument('--import_subject', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='whether to import subject into pycortex')
-parser.add_argument('--import_session',
+parser.add_argument('--import_session', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='whether to import session into pycortex subject')
 
-parser.add_argument('--flatmap_pRFs',
+parser.add_argument('--flatmap_pRFs', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='visualize pRF results in pdfs')
 parser.add_argument('--webgl_pRFs', type=int,
                     help='visualize pRF results in web browser. 1: save to folder, 2: open webgl interface')

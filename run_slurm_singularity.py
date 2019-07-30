@@ -4,6 +4,9 @@ import glob
 import json
 import sys
 import argparse
+import yaml
+
+from utils import *
 
 ###################################################################
 ###
@@ -16,15 +19,18 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--subjects', metavar='N', type=int, nargs='+',
                     help='BIDS integer for this subject')
 
-parser.add_argument('--fmriprep',
+parser.add_argument('--fmriprep', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='whether to run fmriprep')
-parser.add_argument('--mriqc_subject',
+parser.add_argument('--mriqc_subject', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='whether to run mriqc on the subject')
-parser.add_argument('--mriqc_group',
+parser.add_argument('--mriqc_group', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='whether to run mriqc on the group')
 
 
-parser.set_defaults(fmriprep=False, mriqc_subject=False, mriqc_group=False)
+# parser.set_defaults(fmriprep=False, mriqc_subject=False, mriqc_group=False)
 
 args = parser.parse_args()
 subjects = [str(s).zfill(2) for s in args.subjects]
@@ -61,7 +67,7 @@ if args.fmriprep:
 
         os.chdir(batchdir)
 
-        working_string = batch_string.replace('$SJ_NR', str(subject).zfill(2))
+        working_string = batch_string.replace('$SJ_NR', subject)
 
         js_name = os.path.join(basedir, str(
             subject).zfill(2) + '_lyon-prf_slurm_fmriprep.sh')
@@ -96,7 +102,7 @@ if args.mriqc_subject:
 
         """
 
-        working_string = batch_string.replace('$SJ_NR', str(subject).zfill(2))
+        working_string = batch_string.replace('$SJ_NR', subject)
 
         working_string = batch_string
 

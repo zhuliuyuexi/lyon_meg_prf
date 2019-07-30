@@ -13,6 +13,9 @@ import multiprocessing
 from IPython.core.debugger import set_trace
 # call as `set_trace()` for interactive debugging
 
+from utils import *
+
+
 ###################################################################
 ###
 # start by parsing arguments
@@ -23,9 +26,11 @@ parser = argparse.ArgumentParser(
     description='Run the pRF fitting on given subject')
 parser.add_argument('--subject', type=int, default=1,
                     help='BIDS integer for this subject')
-parser.add_argument('--grid',
+parser.add_argument('--grid', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='whether to perform grid fitting')
-parser.add_argument('--iter',
+parser.add_argument('--iter', type=str2bool, nargs='?',
+                    const=True, default=False,
                     help='whether to perform iterative fitting')
 parser.set_defaults(grid=False, iter=False)
 args = parser.parse_args()
