@@ -36,7 +36,7 @@ args = parser.parse_args()
 subjects = [str(s).zfill(2) for s in args.subjects]
 
 with open('settings.yml', 'r') as f:
-    settings = yaml.load(f)
+    settings = yaml.load(f, Loader=yaml.FullLoader)
 
 batchdir = '/home/rasa.gulbinaite/batch/'
 os.chdir(batchdir)

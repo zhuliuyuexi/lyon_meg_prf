@@ -37,7 +37,7 @@ args = parser.parse_args()
 subject = str(args.subject).zfill(2)
 
 with open('settings.yml', 'r') as f:
-    settings = yaml.load(f)
+    settings = yaml.load(f, Loader=yaml.FullLoader)
 
 
 ###################################################################
