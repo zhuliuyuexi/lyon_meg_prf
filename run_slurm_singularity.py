@@ -87,7 +87,7 @@ if args.mriqc_subject:
         #PBS -lwalltime=1:00:00 -lnodes=1
 
         PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
-        /mnt/data/rasa/software/poldracklab_mriqc_0.11.0-2018-06-05-442554ee49a6.img \
+        /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
         /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
         --participant-label sub-$SJ_NR --n_procs 15 -m bold --verbose-reports --mem_gb 32 \
         --ants-nthreads 15 -w /scratch
@@ -124,7 +124,7 @@ if args.mriqc_group:
     #PBS -lwalltime=0:30:00 -lnodes=1
 
     PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
-    /mnt/data/rasa/software/poldracklab_mriqc_0.11.0-2018-06-05-442554ee49a6.img \
+    /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
     /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
     --n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15 \
     -w /scratch
