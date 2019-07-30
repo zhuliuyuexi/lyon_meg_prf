@@ -93,7 +93,7 @@ PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/mriqc_0.14.2.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
 --participant-label sub-$SJ_NR --n_procs 15 -m bold --verbose-reports --mem_gb 32 \
---ants-nthreads 15
+--ants-nthreads 15  --skip_bids_validation
 
 wait          # wait until programs are finished
 
@@ -128,7 +128,7 @@ if args.mriqc_group:
 PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
---n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15 
+--n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15  --skip_bids_validation
 
 wait          # wait until programs are finished
     """
