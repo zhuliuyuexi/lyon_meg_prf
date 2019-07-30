@@ -51,18 +51,18 @@ if args.fmriprep:
     for subject in subjects:
 
         batch_string = """#!/bin/bash
-        #SBATCH -p normal -t 20:00:00 -N 1
-        # job requires at most 100 hours, 0 minutes
-        #     and 0 seconds wallclock time
+#SBATCH -p normal -t 20:00:00 -N 1
+# job requires at most 100 hours, 0 minutes
+#     and 0 seconds wallclock time
 
-        PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
-        /mnt/data/rasa/software/poldracklab_fmriprep_1.4.1-2019-07-09-412a69224405.simg \
-        /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
-        --participant-label sub-$SJ_NR --output-spaces T1w MNI152NLin2009cAsym fsaverage fsnative \
-        --use-syn-sdc --write-graph --nthreads 15 --omp-nthreads 15 --low-mem --fs-license-file /home/rasa.gulbinaite/software/freesurfer/license.txt \
-        --ignore slicetiming -w /scratch --skip_bids_validation 
+PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
+/mnt/data/rasa/software/poldracklab_fmriprep_1.4.1-2019-07-09-412a69224405.simg \
+/mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
+--participant-label sub-$SJ_NR --output-spaces T1w MNI152NLin2009cAsym fsaverage fsnative \
+--use-syn-sdc --write-graph --nthreads 15 --omp-nthreads 15 --low-mem --fs-license-file /home/rasa.gulbinaite/software/freesurfer/license.txt \
+--ignore slicetiming -w /scratch --skip_bids_validation 
 
-        wait          # wait until programs are finished
+wait          # wait until programs are finished
         """
 
         working_string = batch_string.replace('$SJ_NR', subject)
@@ -86,17 +86,16 @@ if args.fmriprep:
 if args.mriqc_subject:
     for subject in subjects:
 
-        batch_string = """# shell for the job:
-        #PBS -S /bin/bash
-        #PBS -lwalltime=1:00:00 -lnodes=1
+        batch_string = """#!/bin/bash
+#SBATCH -p normal -t 1:00:00 -N 1
 
-        PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
-        /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
-        /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
-        --participant-label sub-$SJ_NR --n_procs 15 -m bold --verbose-reports --mem_gb 32 \
-        --ants-nthreads 15 -w /scratch
+PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
+/mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
+/mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
+--participant-label sub-$SJ_NR --n_procs 15 -m bold --verbose-reports --mem_gb 32 \
+--ants-nthreads 15 -w /scratch
 
-        wait          # wait until programs are finished
+wait          # wait until programs are finished
 
         """
 
@@ -123,18 +122,16 @@ if args.mriqc_subject:
 
 if args.mriqc_group:
 
-    batch_string = """# shell for the job:
-    #PBS -S /bin/bash
-    #PBS -lwalltime=0:30:00 -lnodes=1
+    batch_string = """#!/bin/bash
+#SBATCH -p normal -t 1:00:00 -N 1
 
-    PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
-    /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
-    /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
-    --n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15 \
-    -w /scratch
+PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
+/mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
+/mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
+--n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15 \
+-w /scratch
 
-    wait          # wait until programs are finished
-
+wait          # wait until programs are finished
     """
 
     js_name = os.path.join(batchdir, 'prf_slurm_mriqc_group.sh')
