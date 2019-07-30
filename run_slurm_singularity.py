@@ -55,12 +55,12 @@ if args.fmriprep:
 # job requires at most 100 hours, 0 minutes
 #     and 0 seconds wallclock time
 
-PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
+PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/poldracklab_fmriprep_1.4.1-2019-07-09-412a69224405.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
 --participant-label sub-$SJ_NR --output-spaces T1w MNI152NLin2009cAsym fsaverage fsnative \
 --use-syn-sdc --write-graph --nthreads 15 --omp-nthreads 15 --low-mem --fs-license-file /home/rasa.gulbinaite/software/freesurfer/license.txt \
---ignore slicetiming -w /scratch --skip_bids_validation 
+--ignore slicetiming --skip_bids_validation 
 
 wait          # wait until programs are finished
         """
@@ -89,11 +89,11 @@ if args.mriqc_subject:
         batch_string = """#!/bin/bash
 #SBATCH -t 1:00:00 -N 1
 
-PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
+PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/mriqc_0.14.2.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
 --participant-label sub-$SJ_NR --n_procs 15 -m bold --verbose-reports --mem_gb 32 \
---ants-nthreads 15 -w /scratch
+--ants-nthreads 15
 
 wait          # wait until programs are finished
 
@@ -125,11 +125,10 @@ if args.mriqc_group:
     batch_string = """#!/bin/bash
 #SBATCH -t 1:00:00 -N 1
 
-PYTHONPATH="" singularity run -B /mnt/data/rasa,/scratch \
+PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
---n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15 \
--w /scratch
+--n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15 
 
 wait          # wait until programs are finished
     """
