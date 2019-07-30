@@ -60,7 +60,7 @@ PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
 --participant-label sub-$SJ_NR --output-space T1w template fsaverage fsnative \
 --use-syn-sdc --write-graph --nthreads 15 --omp-nthreads 15 --low-mem --fs-license-file /home/rasa.gulbinaite/software/freesurfer/license.txt \
---ignore slicetiming --skip_bids_validation 
+--ignore slicetiming --skip_bids_validation -w /mnt/data/rasa/prf_lyon/tmp
 
 wait          # wait until programs are finished
         """
@@ -93,7 +93,7 @@ PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/mriqc_0.14.2.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
 --participant-label sub-$SJ_NR --n_procs 15 -m bold --verbose-reports --mem_gb 32 \
---ants-nthreads 15  --skip_bids_validation
+--ants-nthreads 15  --skip_bids_validation -w /mnt/data/rasa/prf_lyon/tmp
 
 wait          # wait until programs are finished
 
@@ -128,7 +128,7 @@ if args.mriqc_group:
 PYTHONPATH="" singularity run -B /mnt/data/rasa \
 /mnt/data/rasa/software/poldracklab_mriqc_latest-2019-04-05-f2009956414a.simg \
 /mnt/data/rasa/prf_lyon/bids/ /mnt/data/rasa/prf_lyon/derivatives/out/ participant \
---n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15  --skip_bids_validation
+--n_procs 15 -m bold --verbose-reports --mem_gb 32 --ants-nthreads 15  --skip_bids_validation -w /mnt/data/rasa/prf_lyon/tmp
 
 wait          # wait until programs are finished
     """
