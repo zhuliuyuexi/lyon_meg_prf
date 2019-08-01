@@ -17,9 +17,9 @@ It isn't using all the newest software, but we're aiming for a set of simple scr
    - This will perform temporal filtering and percent-signal change conversion of the fmriprep output `.nii.gz` files.
    - It will also average (median) across all repetitions of the runs, and
    - Copy over files like example epi file and brainmask file.
-5. run `python run_surf.py --subject $SJNR --import_subject 1 --import_session 1`, which will import your subject's anatomy into pycortex's folders.
-6. run `python run_fit.py --subject $SJNR --grid 1`, which will perform grid fitting using pre-calculated regressors, and save out the results to `grid_rsq.nii.gz` and `grid_params.nii.gz`
-7. run `python run_surf.py --subject $SJNR --flatmap_pRFs 1 --webgl_pRFs 1`, which will perform visualizations based on `grid_rsq.nii.gz` and `grid_params.nii.gz`
+5. run `python run_surf.py --subject $SJNR --import_subject --import_session`, which will import your subject's anatomy into pycortex's folders.
+6. run `python run_fit.py --subject $SJNR --grid`, which will perform grid fitting using pre-calculated regressors, and save out the results to `grid_rsq.nii.gz` and `grid_params.nii.gz`
+7. run `python run_surf.py --subject $SJNR --flatmap_pRFs --webgl_pRFs 1`, which will perform visualizations based on `grid_rsq.nii.gz` and `grid_params.nii.gz`
 
 # Other stuff
 
