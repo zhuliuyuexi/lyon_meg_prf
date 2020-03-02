@@ -5,6 +5,8 @@ from spynoza.filtering.nodes import savgol_filter
 from spynoza.conversion.nodes import percent_signal_change
 import nibabel as nb
 import numpy as np
+import argparse
+import yaml
 
 ###################################################################
 ###
@@ -30,10 +32,10 @@ with open('settings.yml', 'r') as f:
 
 base_dir = None
 uname = str(os.uname())
-for s in settings['system']:
-    if settings['system'][s]['uname'] in uname:
-        base_dir = settings['system'][s]['base_dir']
-        system = settings['system'][s]['uname']
+for s in settings['systems']:
+    if settings['systems'][s]['uname'] in uname:
+        base_dir = settings['systems'][s]['base_dir']
+        system = settings['systems'][s]['uname']
 
 if base_dir == None:
     sys.exit()
@@ -90,6 +92,6 @@ nii_img_median_data.to_filename(os.path.join(os.path.split(
 # now, set up all the required files in that folder
 # using the last item of the nii_files, and the to_be_averaged path.
 shutil.copyfile(to_be_averaged.replace('_desc-preproc_bold', '_brain-mask'),
-        os.path.join(os.path.split(to_be_averaged[0])[0], settings['brainmask_filename'].format(subject=subject))))
+        os.path.join(os.path.split(to_be_averaged[0])[0], settings['brainmask_filename'].format(subject=subject)))
 shutil.copyfile(to_be_averaged.replace('_desc-preproc_bold', '_boldref'),
-        os.path.join(os.path.split(to_be_averaged[0])[0], settings['example_epi_filename'].format(subject=subject))))
+        os.path.join(os.path.split(to_be_averaged[0])[0], settings['example_epi_filename'].format(subject=subject)))
