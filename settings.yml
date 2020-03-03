@@ -2,28 +2,28 @@ systems:
   calcule:
     uname: lisa
     base_dir: /project/k_lab/data/prf_glaucoma
-    threads: 24
+    threads: 24  
   romulus:
     uname: node230
     base_dir: /scratch/2019/visual/prf_lyon
     threads: 36
   laptop:
-    uname: Darwin
-    base_dir: /Users/knapen/Downloads/prf_lyon
+    uname: tingli
+    base_dir: /home/tingli/dataset
     threads: 4
   salledI:
     uname: pc
     base_dir: /whateverfolderidecidetomountmyserverfolderat.
     threads: 8
 
-result_dir: derivatives/out
+result_dir: derivatives
 session: "01"
 fmriprep_output_wildcard: fmriprep/sub-{subject}/func/sub-{subject}*_space-T1w_desc-preproc_bold.nii.gz
-average_wildcard: pp/sub-{subject}/func/sub-{subject}*_task-PRF-*_space-T1w_desc-preproc_bold_sg_psc.nii.gz
-median_psc_filename: pp/sub-{subject}/func/sub-{subject}_task-prf_acq-median_T1w_desc-preproc_bold.nii.gz
-brainmask_filename: pp/sub-{subject}/func/sub-{subject}_task-prf_acq-median_T1w_desc-preproc_brainmask.nii.gz
-example_epi_filename: pp/sub-{subject}/func/sub-{subject}_task-prf_acq-median_T1w_desc-preproc_boldref.nii.gz
-cortical_mask_filename: pp/sub-{subject}/func/sub-{subject}_task-prf_acq-median_T1w_desc-preproc_cortex.nii.gz
+average_wildcard: pp/sub-{subject}/func/sub-{subject}*_task-vision*_space-T1w_desc-preproc_bold_sg_psc.nii.gz
+median_psc_filename: pp/sub-{subject}/func/sub-{subject}_task-vision_acq-median_T1w_desc-preproc_bold.nii.gz
+brainmask_filename: pp/sub-{subject}/func/sub-{subject}_task-vision_acq-median_T1w_desc-preproc_brainmask.nii.gz
+example_epi_filename: pp/sub-{subject}/func/sub-{subject}_task-vision_acq-median_T1w_desc-preproc_boldref.nii.gz
+cortical_mask_filename: pp/sub-{subject}/func/sub-{subject}_task-vision_acq-median_T1w_desc-preproc_cortex.nii.gz
 dm_file: dm.npy
 
 TR: 2
@@ -42,5 +42,5 @@ screen_distance: 78
 screen_width: 47
 sg_filt_deriv: 0
 sg_filt_polyorder: 3
-sg_filt_window_length: 121
+sg_filt_window_length: 201
 psc_method: median
