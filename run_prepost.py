@@ -1,5 +1,6 @@
 import glob
 import os
+import sys
 import shutil
 from spynoza.filtering.nodes import savgol_filter
 from spynoza.conversion.nodes import percent_signal_change
@@ -16,7 +17,7 @@ import yaml
 
 parser = argparse.ArgumentParser(
     description='Run the pRF fitting on given subject')
-parser.add_argument('--subject', type=int, default=1,
+parser.add_argument('--subject', type=str, default=1,
                     help='BIDS integer for this subject')
 args = parser.parse_args()
 subject = str(args.subject).zfill(2)
